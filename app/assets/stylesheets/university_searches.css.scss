@@ -1,3 +1,75 @@
 // Place all the styles related to the UniversitySearches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@charset "utf-8";
+/* CSS Document */
+
+.header{
+	margin:0;
+	color:#232323;
+	padding-top: 0px;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	background-attachment: scroll;
+	background-image: url(/assets/bg.jpg);
+	background-repeat: repeat-x;
+	background-position: top;
+	background-color: #faf5e1;
+	width: 100%;
+	height: 200px;
+}
+body {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-family: verdana,arial,helvetica,sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    margin: auto;
+}
+.new-form{
+    margin: 40px auto auto;
+    width: 725px;	
+}
+#university_search_university_name{
+    height: 28px;
+    padding: 8px;
+    width: 500px;
+}
+.university-btn{
+    background-clip: padding-box;
+    background-color: #0779DD;
+    background-image: -moz-linear-gradient(#A8C8E5, #619CCF 10%, #316EA3 50%, #2E6698 50%, #3A81BF);
+    border-color: #234E74;
+    border-radius: 6px 6px 6px 6px;
+    border-width: 1px;
+    box-shadow: 0 0 0.1em 1px rgba(255, 255, 255, 0.447) inset;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 1.2em;
+    padding: 0.3em 1em;
+    text-shadow: 0 1px 1px #033561;
+}
+.new-form-fields{
+	float: left;
+	margin-right: 20px;
+}
+.new-form-submit-image{
+    float: left;
+}
+.all-form{
+    height: 55px;
+    width: 850px;
+}
+.new-form-fields input{
+    border: 1px solid grey;
+    border-radius: 6px 6px 6px 6px;
+  
+    width: 500px;
+    font-size: 28px;
+    height: 38px;
+    width: 500px;
+}
