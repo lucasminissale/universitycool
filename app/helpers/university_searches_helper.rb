@@ -1,0 +1,2 @@
+module UniversitySearchesHelper
+end

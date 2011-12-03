@@ -1,4 +1,6 @@
 Universitycool::Application.routes.draw do
+  resources :university_searches
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,21 @@
+<%= form_for(@university_search) do |f| %>
+  <% if @university_search.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@university_search.errors.count, "error") %> prohibited this university_search from being saved:</h2>
+
+      <ul>
+      <% @university_search.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :university_name %><br />
+    <%= f.text_field :university_name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

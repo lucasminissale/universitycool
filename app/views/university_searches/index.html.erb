@@ -1,0 +1,23 @@
+<h1>Listing university_searches</h1>
+
+<table>
+  <tr>
+    <th>University name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @university_searches.each do |university_search| %>
+  <tr>
+    <td><%= university_search.university_name %></td>
+    <td><%= link_to 'Show', university_search %></td>
+    <td><%= link_to 'Edit', edit_university_search_path(university_search) %></td>
+    <td><%= link_to 'Destroy', university_search, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New University search', new_university_search_path %>
