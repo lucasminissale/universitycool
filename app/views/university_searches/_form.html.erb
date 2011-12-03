@@ -1,5 +1,5 @@
 <div class="header">
-
+  <div class="title">Datos Universitarios</div>
 </div>
 <div class="new-form">
   <%= form_for(@university_search) do |f| %>
@@ -17,7 +17,7 @@
       </div>
     <% end %>
       <div class="new-form-fields">
-        <%= f.text_field :university_name %>
+        <%= f.text_field :university_name, :placeholder => "Nombre de la Universidad" %>
       </div>
       <div class="new-form-submit-image">
         <%= f.submit "Buscar",:id=>"search-university-btn", :class=>"university-btn" %>

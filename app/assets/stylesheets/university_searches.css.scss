@@ -7,6 +7,7 @@
 /* CSS Document */
 
 .header{
+    font-family: 'Ribeye Marrow', cursive;
 	margin:0;
 	color:#232323;
 	padding-top: 0px;
@@ -20,6 +21,11 @@
 	background-color: #faf5e1;
 	width: 100%;
 	height: 200px;
+}
+.header .title{
+    font-size: 80px;
+    padding-left: 50px;
+    padding-top: 85px;    
 }
 body {
     background-color: #FFFFFF;
