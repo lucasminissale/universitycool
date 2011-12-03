@@ -80,4 +80,12 @@ class UniversitySearchesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def about_us
+
+  end
+
+  def about_site
+    
+  end
 end
