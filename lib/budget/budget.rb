@@ -17,11 +17,11 @@ module Budget
       end
 
       def get_zips
-        get_extension_files("./budgets", "zip")
+        get_extension_files("#{Rails.root}/lib/budget/budgets", "zip")
       end
 
       def get_xlss
-        get_extension_files("./budgets", "xls")
+        get_extension_files("#{Rails.root}/lib/budget/budgets", "xls")
       end
 
       def get_extension_files(path, ext)
@@ -103,13 +103,14 @@ module Budget
       @date = Date.parse(File.basename(xls, ".xls"))
       @xls = Excel.new(xls)
       @university_count = @xls.last_row - 1 - 9
+      puts xls
     end
 
     def universities
       @universities ||= []
       if @universities.empty?
         (9..@university_count).to_a.each do |i|
-          @universities << @xls.cell(i, 1)
+          @universities << @xls.cell(i, 1) if @xls.cell(i,1) =~ /\w+/
         end
       end
       @universities
@@ -163,7 +164,7 @@ module Budget
       xlss.each do |xls|
         output << XLSParser.new(xls).universities
       end
-      output.uniq
+      output.flatten.uniq
     end
 
     def self.data
@@ -176,14 +177,3 @@ module Budget
     end
   end
 end
-
-#Budget::BudgetFile.extract_zips("./budgets")
-#umb = Budget::UniversityMonthBudget.new("BUENOS AIRES", "09-01-31.xls")
-#puts umb.matrix.inspect
-#
-
-puts Budget::University.data
-
-#xls = Budget::BudgetFile.get_xlss.first
-##parser = Budget::XLSParser.new(xls)
-
