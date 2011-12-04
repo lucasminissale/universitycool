@@ -12,15 +12,20 @@ class UniversitySearchesController < ApplicationController
 
   def show
     @university_search = UniversitySearch.find(params[:id])
-    object = University.find_by_alias(@university_search.university_name)
+    @university = University.find_by_alias(@university_search.university_name)
     @universities = University.all
-    @result = BudgetUniversity.new(object)
+    #@result = BudgetUniversity.new(object)
     @university_search = UniversitySearch.new
+    if @university
+      @months, @money = UniversityData.presupuestos(@university)
+      @salaries = UniversityData.salaries(@university)
+    end
     respond_to do |format|
-      unless object.nil?
+      unless @university.nil?
         format.html # show.html.erb
         format.json { render json: @university_search }
       else
+        @university_search.errors.add :base, "No se ha encontrado esa universidad."
         format.html { render action: "new" }
       end
     end
@@ -49,6 +54,7 @@ class UniversitySearchesController < ApplicationController
         format.html { redirect_to @university_search, notice: 'University search was successfully created.' }
         format.json { render json: @university_search, status: :created, location: @university_search }
       else
+        @universities = University.all
         format.html { render action: "new" }
         format.json { render json: @university_search.errors, status: :unprocessable_entity }
       end

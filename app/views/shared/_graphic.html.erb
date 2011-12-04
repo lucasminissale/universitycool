@@ -1,22 +1,22 @@
 <% content_for :head do %>
   <%= javascript_include_tag "/js/highcharts.js" %>
 <% end %>
-<h1>Universities#index</h1>
 
-<p>Find me in app/views/universities/index.html.erb</p>
-<div class='container' id='container'></div>
+<div class='budget-graphic' id='<%= id %>'></div>
 <script>
 var chart;
 $(document).ready(function() {
    chart = new Highcharts.Chart({
       chart: {
-         renderTo: 'container',
+         renderTo: '<%= id %>',
          defaultSeriesType: 'line',
          marginRight: 130,
-         marginBottom: 25
+         marginBottom: 25,
+		 borderColor: 'white',
+		backgroundColor: 'white'
       },
       title: {
-         text: 'Presupuesto mensual',
+         text: '<%=title%>',
          x: -20 //center
       },
       subtitle: {
@@ -24,7 +24,7 @@ $(document).ready(function() {
          x: -20
       },
       xAxis: {
-         categories: <%= raw @months.inspect %>
+         categories: <%= raw months.inspect %>
       },
       yAxis: {
          title: {
@@ -51,8 +51,8 @@ $(document).ready(function() {
          borderWidth: 0
       },
       series: [{
-         name: 'UBA',
-         data: <%= raw @money.map { |m| m.to_i }%>
+         name: '<%=@university.name%>',
+         data: <%= raw money.map { |m| m.to_i }%>
       }]
    });  
 });

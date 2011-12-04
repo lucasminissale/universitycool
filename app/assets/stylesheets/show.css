@@ -4,7 +4,6 @@
 
 .wrapped{
     background: url("/assets/show_bg.png") repeat scroll 0 0 transparent;
-    height: 500px;
     padding: 75px;
 	padding-top: 50px;
 }
@@ -16,36 +15,32 @@
 .container{
 	background: white;
 	padding: 20px;
-	height: 500px;
 	border-radius: 30px 30px 30px 30px;
 }
 
 .container .top .map{
 	float: right;
+	margin-left: 20px;
 }
 
 .container .top .main-info{
 	float: left;
 }
 .container .top .main-info .university-name{
-    background: none repeat scroll 0 0 #F4F3F0;
+   background: none repeat scroll 0 0 #F4F3F0;
     border: 1px solid #F4F3F0;
     border-radius: 30px 30px 30px 30px;
-    font-size: 15px;
+    font-size: 30px;
     font-weight: bold;
+    line-height: 35px;
+    margin-bottom: 30px;
     min-height: 34px;
-    margin-bottom: 10px;
     text-align: center;
+    width: 455px;
 }
 .container .top .main-info .university-address{
-	border: 1px solid #F4F3F0;
-	background: #F4F3F0;
-    border-radius: 30px 30px 30px 30px;
     font-size: 15px;
     font-weight: bold;
-    min-height: 34px;
-    margin-bottom: 10px;
-    text-align: center;
 }
 .container .top .main-info span{
 	display:block;
