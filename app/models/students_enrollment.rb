@@ -1,4 +1,9 @@
 class StudentsEnrollment < ActiveRecord::Base
+
+  def desertion_relation
+    reenrollment.to_f / previous_enrollment
+  end
+  
   def self.populate
     students = Budget::StudentParser.new("#{Rails.root}/lib/budget/students/students.xls")
     students.get_data.each do |d|

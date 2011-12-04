@@ -39,6 +39,62 @@
 			<%= render :partial=> "/shared/graphic", :locals => { :money => @money, :months => @months, :title => 'Presupuesto mensual', :id => 'presupuestos'}%>
 			
 			<%= render :partial=> "/shared/graphic", :locals => { :money => @salaries, :months => @months, :title => 'Salarios', :id => 'salarios'}%>
+			
+			<div class='desertion_relation' id='desertion_relation'></div>
+<script>
+var chart;
+<% if @students_enrollment %>
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'desertion_relation',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+      title: {
+         text: 'Tasa de deserción por carrera.'
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+         }
+      },
+      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               color: Highcharts.theme.textColor || '#000000',
+               connectorColor: Highcharts.theme.textColor || '#000000',
+               formatter: function() {
+                  return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+               }
+            }
+         }
+      },
+       series: [{
+         type: 'pie',
+         name: 'Tasa de deserción',
+         data: [
+             <% @students_enrollment.each do |st| %>
+               ["<%= st.career %>", <%= st.desertion_relation %>],
+             <% end %>
+         ]
+      }]
+   });
+});
+</script>
+<% end %>
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		</div>
 	</div>
