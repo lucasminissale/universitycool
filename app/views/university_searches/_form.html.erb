@@ -3,14 +3,10 @@
     <div class="all-form">
 
     <% if @university_search.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@university_search.errors.count, "error.") %> No se ha podido realizar la busqueda</h2>
-
-        <ul>
+      <div>
         <% @university_search.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <div><%= msg %></div>
         <% end %>
-        </ul>
       </div>
     <% end %>
       <div class="new-form-fields">

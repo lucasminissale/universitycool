@@ -2,13 +2,13 @@
   <%= javascript_include_tag "/js/highcharts.js" %>
 <% end %>
 
-<div class='budget-graphic' id='budget-graphic'></div>
+<div class='budget-graphic' id='<%= id %>'></div>
 <script>
 var chart;
 $(document).ready(function() {
    chart = new Highcharts.Chart({
       chart: {
-         renderTo: 'budget-graphic',
+         renderTo: '<%= id %>',
          defaultSeriesType: 'line',
          marginRight: 130,
          marginBottom: 25,
@@ -16,7 +16,7 @@ $(document).ready(function() {
 		backgroundColor: 'white'
       },
       title: {
-         text: 'Presupuesto mensual',
+         text: '<%=title%>',
          x: -20 //center
       },
       subtitle: {
@@ -24,7 +24,7 @@ $(document).ready(function() {
          x: -20
       },
       xAxis: {
-         categories: <%= raw @months.inspect %>
+         categories: <%= raw months.inspect %>
       },
       yAxis: {
          title: {
@@ -52,7 +52,7 @@ $(document).ready(function() {
       },
       series: [{
          name: '<%=@university.name%>',
-         data: <%= raw @money.map { |m| m.to_i }%>
+         data: <%= raw money.map { |m| m.to_i }%>
       }]
    });  
 });

@@ -16,12 +16,16 @@ class UniversitySearchesController < ApplicationController
     @universities = University.all
     #@result = BudgetUniversity.new(object)
     @university_search = UniversitySearch.new
-    @months, @money = UniversityData.presupuestos(@university)
+    if @university
+      @months, @money = UniversityData.presupuestos(@university)
+      @salaries = UniversityData.salaries(@university)
+    end
     respond_to do |format|
       unless @university.nil?
         format.html # show.html.erb
         format.json { render json: @university_search }
       else
+        @university_search.errors.add :base, "No se ha encontrado esa universidad."
         format.html { render action: "new" }
       end
     end

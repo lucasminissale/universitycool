@@ -8,6 +8,12 @@ class UniversityData < ActiveRecord::Base
     [months, money]
   end
   
+  def self.salaries(university)
+    datas = self.where(:university_id => university.id).order(:date_from)
+    money = datas.collect { |d| d.sueldos }
+    money    
+  end
+  
   def self.populate
     Budget::University.data.each do |d|
       uni = University.find_by_name(d[0])
