@@ -14,8 +14,4 @@ class UniversityData < ActiveRecord::Base
                   ejecucion: d[7], incentivo: d[8], total: d[9]
     end
   end
-  
-  class BudgetMonth
-    attr_accessor :budget, :month
-  end
 end

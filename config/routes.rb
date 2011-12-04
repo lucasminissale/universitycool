@@ -1,11 +1,14 @@
 Universitycool::Application.routes.draw do
   
+  get "universities/index"
+
   namespace :admin do
       resources :universities
   end
   
   root :to => 'university_searches#new'
   
+  resources :universities
   resources :university_searches
   
   match "/about-us", :to => "university_searches#about_us", :as => :about_us
