@@ -20,7 +20,7 @@ class UniversitySearchesController < ApplicationController
       @months, @money = UniversityData.presupuestos(@university)
       @salaries = UniversityData.salaries(@university)
     end
-    if @university.alias == "UBA"
+    if @university && @university.alias == "UBA"
       @students_enrollment = StudentsEnrollment.where(:university => "Universidad de Buenos Aires").order("last_enrollment desc").limit(5)
     end
     respond_to do |format|
