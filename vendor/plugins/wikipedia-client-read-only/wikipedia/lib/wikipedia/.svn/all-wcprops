@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/2/trunk/wikipedia/lib/wikipedia
+END
+client.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2/trunk/wikipedia/lib/wikipedia/client.rb
+END
+url.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2/trunk/wikipedia/lib/wikipedia/url.rb
+END
+configuration.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/2/trunk/wikipedia/lib/wikipedia/configuration.rb
+END
+page.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2/trunk/wikipedia/lib/wikipedia/page.rb
+END
