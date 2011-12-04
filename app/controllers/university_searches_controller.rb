@@ -24,7 +24,7 @@ class UniversitySearchesController < ApplicationController
   
   def new
     @university_search = UniversitySearch.new
-
+    @universities = ["UADE","UCA","San Andres"]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @university_search }
