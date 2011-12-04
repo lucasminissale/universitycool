@@ -1,7 +1,90 @@
 .our-info{
     height: 500px;
     margin: auto;
-    padding: 30px;
-    width: 800px;   
+    width: 1020px;  
+}
+.about-us-title{
+    font-size: 30px;
+    font-weight: bold;
+    height: 30px;
+    margin: 16px auto auto;
+    text-align: center;
+    width: 500px;  
+}
+
+.our-info-left{
+    width: 504px;  
+    float: left;  
+}
+.our-info-down{
+    float: left;
+    margin: 0px auto auto 425px;
+    width: 200px;
+}
+.our-info-right{
+    float: left;
+    width: 504px;    
+}
+.user-info{
+    height: 192px;
+    width: 500px;   
+}
+.user-info-image{
+    float: left;
+    width: 175px;
+}
+.user-info-image img{
+    width: 175px;
+    border: 1px solid grey;
+    border-radius: 5px 5px 5px 5px;
+}
+.user-info-image-right img{
+    width: 163px;
+}
+.user-info-image-down img{
+    border: 1px solid grey;
+    border-radius: 5px 5px 5px 5px;
+    width: 175px;
+}
+.user-info-text{
+    float: left;
+    width: 200px;    
+    margin-left: 50px;
+}
+.user-info-text-down{
+    float: right;
+    margin-bottom: 15px;
+    width: 200px;
+}
+.clear{
+    clear: both;
+}
+.user-info-name{
+    font-size: 20px;
+    font-weight: bold;    
+}
+
+.user-info-image-right{
+    float: right;
+    width: 163px;    
+}
+.user-info-image-right img{
+    width: 163px;
+    border: 1px solid grey;
+    border-radius: 5px 5px 5px 5px;
+}
+.user-info-text{
+    float: right;
+    margin-right: 61px;
+    margin-top: 62px;
+    width: 200px;
+}
+.user-info-down{
+    height: 276px;
+    width: 200px;	
+}
+.user-info-image-down{
+    float: left;
+    width: 175px;	
 }
 
