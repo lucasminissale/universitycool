@@ -1,12 +1,13 @@
 require 'httparty'
 
 class University < ActiveRecord::Base
+  include Geokit::Geocoders
   include HTTParty
 
   base_uri 'ajax.googleapis.com/'
   default_params :output => 'json'
   format :json
-
+  
   validates :name, :uniqueness => true
 
   has_many :university_datas
@@ -22,4 +23,10 @@ class University < ActiveRecord::Base
       self.create :name => uni
     end
   end
+  
+  def map
+     location = MultiGeocoder.geocode(self.address)
+     "http://maps.google.com/maps/api/staticmap?center=#{address}Y&zoom=14&size=300x256&maptype=roadmap
+     &markers=color:blue|label:S|#{location.ll}&sensor=false"
+   end
 end

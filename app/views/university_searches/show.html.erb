@@ -5,21 +5,38 @@
 	<div class="container">
 		<div class="top">
 			<div class="map">
-				<%= image_tag @result.map %>
+				<%= image_tag @university.map %>
 				<div class="clear"></div>
+			</div>
+			<div class="map">
+				<%= image_tag @university.logo, :width=>"250"%>
 			</div>
 			<div class="main-info">
 				<div class="university-name">
 					<span>
-						<%= @result.name %>
+						<%= @university.alias %>
 					</span>
 				</div>
 				<div class="university-address">
 					<span>
-						<%= @result.address%>
+						<%= @university.address%>
+					</span>
+				</div>
+				<div>
+					<span>
+						Rector de la universidad - <%= @university.rector%>
+					</span>
+				</div>
+				<div>
+					<span>
+						Cantidad de estudiantes - <%= @university.students%>
 					</span>
 				</div>
 			</div>	
+			<div class="clear"></div>
+		</div>
+		<div class="bottom">
+			<%= render :partial=> "/shared/graphic"%>
 			<div class="clear"></div>
 		</div>
 	</div>
