@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20111204032302) do
+ActiveRecord::Schema.define(:version => 20111204043717) do
 
   create_table "universities", :force => true do |t|
     t.string   "name"
@@ -24,9 +23,21 @@ ActiveRecord::Schema.define(:version => 20111204032302) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-=======
-ActiveRecord::Schema.define(:version => 20111203171636) do
->>>>>>> 4ba6afa2fa0264ea008fc5489cc4a04878a03e21
+
+  create_table "university_data", :force => true do |t|
+    t.integer  "university_id"
+    t.string   "creditos_aprobados"
+    t.string   "sueldos"
+    t.string   "gastos"
+    t.string   "adicional_dr"
+    t.string   "adicional_ms"
+    t.string   "ejecucion"
+    t.string   "incentivo"
+    t.string   "total"
+    t.datetime "date_from"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "university_searches", :force => true do |t|
     t.string   "university_name"

@@ -37,7 +37,7 @@ module Budget
     end
   end
 
-  METHODS = %(creditos_aprobados sueldos gastos adicionar_dr adicional_ms ejecucion incentivo total)
+  METHODS = %(creditos_aprobados sueldos gastos adicional_dr adicional_ms ejecucion incentivo total)
 
   class UniversityBudget
     def initialize(name)
@@ -104,9 +104,7 @@ module Budget
       valid_rows = []
       @xls.last_row.times do |j|
         t = j+1
-        puts @xls.cell(t,2)
         if /^\d+/.match(@xls.cell(t, 2).to_s)
-          puts @xls.cell(t,2)
           valid_rows << t 
         end
       end
@@ -116,6 +114,7 @@ module Budget
     def universities
       @universities ||= []
       if @universities.empty?
+        puts @date
         @range.to_a.each do |i|
           @universities << @xls.cell(i, 1) if @xls.cell(i,1) =~ /\w+/
         end
@@ -130,6 +129,7 @@ module Budget
         INTEREST_COLUMNS.each do |j|
           row << @xls.cell(i, j)
         end
+        puts row.inspect
         output << row
       end
       output
@@ -178,7 +178,9 @@ module Budget
       output = []
       xlss = Budget::BudgetFile.get_xlss
       xlss.each do |xls|
-        output << XLSParser.new(xls).get_values
+        XLSParser.new(xls).get_values.each do |dd|
+          output << dd
+        end
       end
       output
     end
