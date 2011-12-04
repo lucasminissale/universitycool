@@ -3,7 +3,9 @@ class UniversityData < ActiveRecord::Base
   
   def self.presupuestos(university)
     datas = self.where(:university_id => university.id).order(:date_from)
-    datas.collect { |d| d.creditos_aprobados }
+    months = datas.collect { |d| d.date_from }
+    money = datas.collect { |d| d.creditos_aprobados }
+    [months, money]
   end
   
   def self.populate

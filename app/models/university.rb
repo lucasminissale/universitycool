@@ -1,7 +1,7 @@
 class University < ActiveRecord::Base
 
   validates :name, :uniqueness => true
-  
+
   has_many :university_datas
 
   def self.populate

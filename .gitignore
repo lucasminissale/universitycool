@@ -16,4 +16,7 @@ coverage/
 .rvmrc
 *.swp
 Gemfile.*
+*.*~
+.~*
+*~
 .rvm*

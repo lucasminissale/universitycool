@@ -1,6 +1,8 @@
 class University < ActiveRecord::Base
 
   validates :name, :uniqueness => true
+  
+  has_many :university_datas
 
   def self.populate
     Budget::University.get_universities.each do |uni|
