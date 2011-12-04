@@ -69,7 +69,7 @@ class Admin::UniversitiesController < Admin::AdminsController
     @university.destroy
 
     respond_to do |format|
-      format.html { redirect_to university_url }
+      format.html { redirect_to admin_universities_url }
       format.json { head :ok }
     end
   end

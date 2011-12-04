@@ -10,12 +10,26 @@
         <% end %>
         </ul>
       </div>
-    <% end %>
-      <p>
-	    <%=f.label :name%>
-	  </p>
+    <% end %> 
 	  <p>
-        <%= f.text_field :name, :placeholder => "Nombre de la Universidad" %>
+		<%=f.label :name%>
+        <%= f.text_field :name, :placeholder => "Alias de la Universidad" %>
+      </p>
+	  <p>
+		<%=f.label :alias%>
+        <%= f.text_field :alias %>
+      </p>
+	  <p>
+		<%=f.label :address%>
+        <%= f.text_field :address %>
+      </p>
+	  <p>
+		<%=f.label :fundation%>
+        <%= f.text_field :fundation%>
+      </p>
+	  <p>
+		<%=f.label :students%>
+        <%= f.text_field :students%>
       </p>
       <p>
         <%= f.submit "Guardar" %>

@@ -25,7 +25,7 @@
           var availableTags = [];
 
           <% @universities.each do |u| %>
-             availableTags.push("<%=u%>");
+             availableTags.push("<%=u.alias%>");
           <% end %>
           $( "#ui-autocomplete-input" ).autocomplete({
             source: availableTags
