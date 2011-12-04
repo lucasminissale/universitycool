@@ -159,12 +159,31 @@ module Budget
       output
     end
   end
+
+  class StudentParser
+    attr_reader :xls
+
+    def initialize(xls)
+      @xls = Excel.new(xls)
+      @range = (3..2487)
+    end
+
+    def get_data
+      output = []
+      @range.to_a.each do |row|
+        new_row = [@xls.cell(row, 2), @xls.cell(row, 4), @xls.cell(row, 13), @xls.cell(row, 23), @xls.cell(row, 24)]
+        puts new_row.inspect
+        output << new_row
+      end
+      output
+    end
+  end
 end
 
-xlss = Budget::BudgetFile.get_xlss
-xlss.each do |xls|
-  Budget::XLSParser.new(xls).get_values.inspect
-end
+#xlss = Budget::BudgetFile.get_xlss
+#xlss.each do |xls|
+  #Budget::XLSParser.new(xls).get_values.inspect
+#end
 #puts Budget::XLSParser.new("budgets/09-12-31.xls").get_titles
 #11-08-31
 #11-03-31
