@@ -4,6 +4,7 @@ source "http://gems.github.com"
 gem 'rails', '3.1.3'
 gem "roo"
 gem 'rubyzip'
+gem 'httparty'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
