@@ -11,14 +11,18 @@ class UniversitySearchesController < ApplicationController
 
 
   def show
-    #@university_search = UniversitySearch.find(params[:id])
+    @university_search = UniversitySearch.find(params[:id])
+    object = University.find_by_alias(@university_search.university_name)
     @universities = University.all
+    @result = BudgetUniversity.new(object)
     @university_search = UniversitySearch.new
-    @result = BudgetUniversity.new("remote object")
-    
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @university_search }
+      unless object.nil?
+        format.html # show.html.erb
+        format.json { render json: @university_search }
+      else
+        format.html { render action: "new" }
+      end
     end
   end
 

@@ -1,6 +1,7 @@
 class University < ActiveRecord::Base
 
   validates :name, :uniqueness => true
+  validates :alias, :uniqueness => true
 
   def self.populate
     Budget::University.get_universities.each do |uni|
