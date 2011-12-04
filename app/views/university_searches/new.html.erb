@@ -1,5 +1,16 @@
+<div class="header">
+ 	<div class="title">Datos Universitarios</div>
+</div>
+<div class="home">
+	<div class="new-form">
+		<%= render 'form' %>
+		<div class="new-about">
+		  <%=link_to "Nosotros", about_us_path%> |
+		  <%=link_to "El sitio", about_site_path%>
+		</div>
+	</div>
+</div>
 
-
-<%= render 'form' %>
-
-<%#= link_to 'Back', university_searches_path %>
+<div class="footer">
+  <div class="footer-image"><%= image_tag("ruby_image.png") %></div>
+</div>
