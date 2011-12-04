@@ -12,6 +12,7 @@ class UniversitySearchesController < ApplicationController
 
   def show
     #@university_search = UniversitySearch.find(params[:id])
+    @universities = University.all
     @university_search = UniversitySearch.new
     @result = BudgetUniversity.new("remote object")
     
@@ -24,7 +25,7 @@ class UniversitySearchesController < ApplicationController
   
   def new
     @university_search = UniversitySearch.new
-
+    @universities = University.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @university_search }

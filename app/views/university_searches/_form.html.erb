@@ -14,10 +14,29 @@
       </div>
     <% end %>
       <div class="new-form-fields">
-        <%= f.text_field :university_name, :placeholder => "Nombre de la Universidad" %>
+        <%= f.text_field :university_name, :placeholder => "Nombre de la Universidad", :id => "ui-autocomplete-input" %>
       </div>
+
+
+       <script>
+        $(function() {
+        
+
+          var availableTags = [];
+
+          <% @universities.each do |u| %>
+             availableTags.push("<%=u.alias%>");
+          <% end %>
+          $( "#ui-autocomplete-input" ).autocomplete({
+            source: availableTags
+          });
+        });
+      </script>
+
+
       <div class="new-form-submit-image">
         <%= f.submit "Buscar",:id=>"search-university-btn", :class=>"university-btn" %>
       </div>
   </div>
   <% end %>
+
