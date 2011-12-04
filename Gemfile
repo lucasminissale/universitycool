@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 source "http://gems.github.com"
 
+gem 'rake', '0.8.7'
 gem 'rails', '3.1.3'
 gem "roo"
 gem 'rubyzip'
