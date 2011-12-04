@@ -1,5 +1,6 @@
 GEM
   remote: http://rubygems.org/
+  remote: http://gems.github.com/
   specs:
     actionmailer (3.1.3)
       actionpack (= 3.1.3)
@@ -42,7 +43,9 @@ GEM
     erubis (2.7.0)
     execjs (1.2.9)
       multi_json (~> 1.0)
+    geokit (1.6.0)
     hike (1.2.1)
+    hpricot (0.8.5)
     i18n (0.6.0)
     jquery-rails (1.0.19)
       railties (~> 3.0)
@@ -88,6 +91,7 @@ GEM
       railties (~> 3.1.0)
       sass (~> 3.1.10)
       tilt (~> 1.3.2)
+    schleyfox-wikipedia-api (0.1.1)
     sprockets (2.0.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -110,9 +114,12 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.1.1)
+  geokit
+  hpricot
   jquery-rails
   rails (= 3.1.3)
   sass-rails (~> 3.1.5)
+  schleyfox-wikipedia-api
   sqlite3
   turn (= 0.8.2)
   uglifier (>= 1.0.3)

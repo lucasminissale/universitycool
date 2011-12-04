@@ -36,6 +36,27 @@ module Budget
       end
     end
   end
+  
+  class University
+    def self.find(name)
+      self.new(name)
+    end
+    
+    def initialize(name)
+      @name = name
+    end
+    
+    def salary(year=nil)
+      
+    end
+  end
+  
+  class UniversityBudget
+    def initialize(uni)
+      @uni = uni
+      
+    end
+  end
 
   class UniversityMonthBudget
     METHODS = %(creditos_aprobados sueldos gastos adicionar_dr adicional_ms ejecucion incentivo total)

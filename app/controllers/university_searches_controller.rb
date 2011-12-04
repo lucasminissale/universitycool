@@ -1,6 +1,5 @@
 class UniversitySearchesController < ApplicationController
-  # GET /university_searches
-  # GET /university_searches.json
+
   def index
     @university_searches = UniversitySearch.all
 
@@ -10,19 +9,19 @@ class UniversitySearchesController < ApplicationController
     end
   end
 
-  # GET /university_searches/1
-  # GET /university_searches/1.json
-  def show
-    @university_search = UniversitySearch.find(params[:id])
 
+  def show
+    #@university_search = UniversitySearch.find(params[:id])
+    @university_search = UniversitySearch.new
+    @result = BudgetUniversity.new("remote object")
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @university_search }
     end
   end
 
-  # GET /university_searches/new
-  # GET /university_searches/new.json
+  
   def new
     @university_search = UniversitySearch.new
 
@@ -32,13 +31,11 @@ class UniversitySearchesController < ApplicationController
     end
   end
 
-  # GET /university_searches/1/edit
   def edit
     @university_search = UniversitySearch.find(params[:id])
   end
 
-  # POST /university_searches
-  # POST /university_searches.json
+ 
   def create
     @university_search = UniversitySearch.new(params[:university_search])
 
@@ -53,8 +50,7 @@ class UniversitySearchesController < ApplicationController
     end
   end
 
-  # PUT /university_searches/1
-  # PUT /university_searches/1.json
+
   def update
     @university_search = UniversitySearch.find(params[:id])
 
@@ -69,8 +65,7 @@ class UniversitySearchesController < ApplicationController
     end
   end
 
-  # DELETE /university_searches/1
-  # DELETE /university_searches/1.json
+
   def destroy
     @university_search = UniversitySearch.find(params[:id])
     @university_search.destroy
