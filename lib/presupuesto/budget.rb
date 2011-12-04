@@ -58,8 +58,38 @@ module Budget
     end
   end
 
+
+  METHODS = %(creditos_aprobados sueldos gastos adicionar_dr adicional_ms ejecucion incentivo total)
+
+  class UniversityBudget
+    def initialize(name)
+      @name = name
+    end
+
+    def months
+
+    end
+
+    def method_missing(sym, *args, &block)
+      if METHODS.include?(sym.to_s)
+
+      else
+        super
+      end
+    end
+
+    def respond_to?(sym, include_private=false)
+      if METHODS.include?(sym.to_s)
+        true
+      else
+        super
+      end
+    end
+
+  end
+
   class UniversityMonthBudget
-    METHODS = %(creditos_aprobados sueldos gastos adicionar_dr adicional_ms ejecucion incentivo total)
+    #METHODS = %(creditos_aprobados sueldos gastos adicionar_dr adicional_ms ejecucion incentivo total)
     def initialize(uni, xls)
       parser = XLSParser.new("./budgets/" + xls)
       @date = parser.date_to
@@ -91,6 +121,7 @@ module Budget
     INTEREST_COLUMNS = [2, 3, 4, 5, 7, 8, 10]
 
     def initialize(xls)
+      @date = Date.parse(File.basename(xls, ".xls"))
       @xls = Excel.new(xls)
       @university_count = @xls.last_row - 1 - 9
     end
@@ -98,22 +129,23 @@ module Budget
     def universities
       @universities ||= []
       if @universities.empty?
-        (9..49).to_a.each do |i|
+        (9..@university_count).to_a.each do |i|
           @universities << @xls.cell(i, 1)
         end
       end
       @universities
     end
 
-    def load_matrix(uni)
-      @matrix ||= []
-      if @matrix.empty?
-        r = find_university(uni)
-        INTEREST_COLUMNS.each do |c|
-          @matrix << @xls.cell(r, c)
+    def get_values
+      output = []
+      (9..@university_count).to_a.each do |i|
+        row = [@xls.cell(i, 1), @date]
+        INTEREST_COLUMNS.each do |j|
+          row << @xls.cell(i, j)
         end
+        output << row
       end
-      @matrix
+      output
     end
 
     def find_university(uni)
@@ -139,36 +171,40 @@ module Budget
     
     def parse_dates
       date_range = @xls.cell(2, 1)
-      date_range = /(\d{2}\/\d{2}\/\d{4})/.match(date_range)
-      puts date_range
+      date_range = /(\d{2}\/\d{2}\/\d{4})/.match(date_range.to_s)
       @date_from = date_range[0]
       @date_to = date_range[1]
     end
   end
 
   class University
-    attr_accessor :credito_aprobado, :sueldo, :gasto_funcionamiento, 
-                  :adicional_dr, :adicional_ms, :ejecucion, :incentivo, 
-                  :total
-  end
-
-  class BudgetUniversity
-    def initialize
+    def self.get_universities
+      output = []
+      xlss = Budget::BudgetFile.get_xlss
+      xlss.each do |xls|
+        output << XLSParser.new(xls).universities
+      end
+      output.uniq
     end
 
-    def creditos_aprobados(year=nil)
-    end
-
-    def sueldos(year=nil)
-    end
-
-    def gastos(year=nil)
+    def self.data
+      output = []
+      xlss = Budget::BudgetFile.get_xlss
+      xlss.each do |xls|
+        output << XLSParser.new(xls).get_values
+      end
+      output
     end
   end
 end
 
 #Budget::BudgetFile.extract_zips("./budgets")
-umb = Budget::UniversityMonthBudget.new("BUENOS AIRES", "09-01-31.xls")
-puts umb.matrix.inspect
+#umb = Budget::UniversityMonthBudget.new("BUENOS AIRES", "09-01-31.xls")
+#puts umb.matrix.inspect
+#
 
+puts Budget::University.data
+
+#xls = Budget::BudgetFile.get_xlss.first
+##parser = Budget::XLSParser.new(xls)
 
