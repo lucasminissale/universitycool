@@ -17,11 +17,19 @@ module Budget
       end
 
       def get_zips
-        get_extension_files("#{Rails.root}/lib/budget/budgets", "zip")
+        begin
+          get_extension_files("#{Rails.root}/lib/budget/budgets", "zip")
+        rescue NameError
+          get_extension_files("./budgets", "zip")
+        end
       end
 
       def get_xlss
-        get_extension_files("#{Rails.root}/lib/budget/budgets", "xls")
+        begin
+          get_extension_files("#{Rails.root}/lib/budget/budgets", "xls")
+        rescue NameError
+          get_extension_files("./budgets", "xls")
+        end
       end
 
       def get_extension_files(path, ext)
@@ -39,60 +47,8 @@ module Budget
 
   METHODS = %(creditos_aprobados sueldos gastos adicional_dr adicional_ms ejecucion incentivo total)
 
-  class UniversityBudget
-    def initialize(name)
-      @name = name
-    end
-
-    def method_missing(sym, *args, &block)
-      if METHODS.include?(sym.to_s)
-
-      else
-        super
-      end
-    end
-
-    def respond_to?(sym, include_private=false)
-      if METHODS.include?(sym.to_s)
-        true
-      else
-        super
-      end
-    end
-
-  end
-
-  class UniversityMonthBudget
-    def initialize(uni, xls)
-      parser = XLSParser.new("./budgets/" + xls)
-      @date = parser.date_to
-      @matrix = parser.load_matrix(uni)
-    end
-
-    def matrix
-      @matrix
-    end
-
-    def method_missing(sym, *args, &block)
-      if METHODS.include?(sym.to_s)
-        # ...
-      else
-        super
-      end
-    end
-
-    def respond_to?(sym, include_private=false)
-      if METHODS.include?(sym.to_s)
-        true
-      else
-        super
-      end
-    end
-  end
-
   class XLSParser
     attr_reader :xls
-    INTEREST_COLUMNS = [2, 3, 4, 5, 7, 8, 10]
 
     def initialize(xls)
       @date = Date.parse(File.basename(xls, ".xls"))
@@ -114,7 +70,6 @@ module Budget
     def universities
       @universities ||= []
       if @universities.empty?
-        puts @date
         @range.to_a.each do |i|
           @universities << @xls.cell(i, 1) if @xls.cell(i,1) =~ /\w+/
         end
@@ -122,17 +77,36 @@ module Budget
       @universities
     end
 
+    def get_titles
+      row = detect_range.first - 1
+      last_column = @xls.last_column
+      titles = []
+      (2..last_column).to_a.each do |j|
+        titles << @xls.cell(row, j)
+      end
+      titles
+    end
+
     def get_values
       output = []
       @range.to_a.each do |i|
         row = [@xls.cell(i, 1), @date]
-        INTEREST_COLUMNS.each do |j|
-          row << @xls.cell(i, j)
+        [2, 3].each do |j|
+          v = @xls.cell(i,j)
+          if blank?(v)
+            row << "0"
+          else
+            row << @xls.cell(i, j)
+          end
         end
         puts row.inspect
         output << row
       end
       output
+    end
+
+    def blank?(cad)
+      cad.nil? || cad == ""
     end
 
     def find_university(uni)
@@ -186,3 +160,14 @@ module Budget
     end
   end
 end
+
+xlss = Budget::BudgetFile.get_xlss
+xlss.each do |xls|
+  Budget::XLSParser.new(xls).get_values.inspect
+end
+#puts Budget::XLSParser.new("budgets/09-12-31.xls").get_titles
+#11-08-31
+#11-03-31
+#10-08-31
+#09-10-31
+#09-02-28
