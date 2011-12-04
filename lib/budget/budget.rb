@@ -36,38 +36,12 @@ module Budget
       end
     end
   end
-  
-  class University
-    def self.find(name)
-      self.new(name)
-    end
-    
-    def initialize(name)
-      @name = name
-    end
-    
-    def salary(year=nil)
-      
-    end
-  end
-  
-  class UniversityBudget
-    def initialize(uni)
-      @uni = uni
-      
-    end
-  end
-
 
   METHODS = %(creditos_aprobados sueldos gastos adicionar_dr adicional_ms ejecucion incentivo total)
 
   class UniversityBudget
     def initialize(name)
       @name = name
-    end
-
-    def months
-
     end
 
     def method_missing(sym, *args, &block)
@@ -89,7 +63,6 @@ module Budget
   end
 
   class UniversityMonthBudget
-    #METHODS = %(creditos_aprobados sueldos gastos adicionar_dr adicional_ms ejecucion incentivo total)
     def initialize(uni, xls)
       parser = XLSParser.new("./budgets/" + xls)
       @date = parser.date_to
@@ -118,19 +91,32 @@ module Budget
   end
 
   class XLSParser
+    attr_reader :xls
     INTEREST_COLUMNS = [2, 3, 4, 5, 7, 8, 10]
 
     def initialize(xls)
       @date = Date.parse(File.basename(xls, ".xls"))
       @xls = Excel.new(xls)
-      @university_count = @xls.last_row - 1 - 9
-      puts xls
+      @range = detect_range
+    end
+
+    def detect_range
+      valid_rows = []
+      @xls.last_row.times do |j|
+        t = j+1
+        puts @xls.cell(t,2)
+        if /^\d+/.match(@xls.cell(t, 2).to_s)
+          puts @xls.cell(t,2)
+          valid_rows << t 
+        end
+      end
+      valid_rows[0]..valid_rows[-2]
     end
 
     def universities
       @universities ||= []
       if @universities.empty?
-        (9..@university_count).to_a.each do |i|
+        @range.to_a.each do |i|
           @universities << @xls.cell(i, 1) if @xls.cell(i,1) =~ /\w+/
         end
       end
@@ -139,7 +125,7 @@ module Budget
 
     def get_values
       output = []
-      (9..@university_count).to_a.each do |i|
+      @range.to_a.each do |i|
         row = [@xls.cell(i, 1), @date]
         INTEREST_COLUMNS.each do |j|
           row << @xls.cell(i, j)
@@ -150,7 +136,7 @@ module Budget
     end
 
     def find_university(uni)
-      j=9
+      j=1
       while j < @university_count
         break unless @xls.cell(j, 1) == uni
         j += 1
