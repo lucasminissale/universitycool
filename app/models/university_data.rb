@@ -14,6 +14,19 @@ class UniversityData < ActiveRecord::Base
     money    
   end
   
+  def self.last_year_on(uni, month)
+    first_day = DateTime.parse("11-#{month}-01")
+    last_day =  first_day.end_of_month
+    self.where(:date_from => (first_day...last_day), :university_id => uni.id).first.creditos_aprobados.to_i
+  end
+  
+  def self.last_first_month(uni)
+    first_day = DateTime.parse("11-01-01")
+    last_day =  first_day.end_of_month
+    d = self.where(:date_from => (first_day...last_day), :university_id => uni.id).first
+    100 * d.sueldos.to_f / d.creditos_aprobados.to_f
+  end
+  
   def self.populate
     Budget::University.data.each do |d|
       uni = University.find_by_name(d[0])

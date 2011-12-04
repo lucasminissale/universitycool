@@ -9,7 +9,6 @@ class UniversitySearchesController < ApplicationController
     end
   end
 
-
   def show
     @university_search = UniversitySearch.find(params[:id])
     @university = University.find_by_alias(@university_search.university_name)

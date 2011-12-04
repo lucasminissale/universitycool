@@ -1,0 +1,126 @@
+<h1>Datos mezclados</h1>
+<div class="container">
+  <div id='per_salary'>
+  </div>
+  
+  <div id="budget">
+  
+  </div>
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'per_salary',
+         defaultSeriesType: 'column'
+      },
+      title: {
+         text: 'Sueldos / Presupuestos'
+      },
+      subtitle: {
+         text: 'Source: www.me.edu.ar'
+      },
+      xAxis: {
+         categories: [
+           <% @universities.each do |uni| %>
+             "<%= uni.alias %>",
+           <% end %>
+         ]
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: ''
+         }
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+               this.x +': '+ this.y +' ';
+         }
+      },
+      plotOptions: {
+         column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+         }
+      },
+         series: [{
+         name: 'Sueldos / Presupuesto',
+         data: [
+           <% @universities.each do |uni| %>
+             <%= uni.salary_per_costs %>,
+           <% end %>
+         ]
+      }]
+   });
+});
+</script>
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'budget',
+         defaultSeriesType: 'column'
+      },
+      title: {
+         text: 'Presupuesto por estudiante por universidades'
+      },
+      subtitle: {
+         text: 'Source: www.me.edu.ar'
+      },
+      xAxis: {
+         categories: [
+            'Jan', 
+            'Feb', 
+            'Mar', 
+            'Apr'
+         ]
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Presupuesto / estudiante'
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         backgroundColor: Highcharts.theme.legendBackgroundColor || '#FFFFFF',
+         align: 'left',
+         verticalAlign: 'top',
+         x: 100,
+         y: 70,
+         floating: true,
+         shadow: true
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+               this.x +': '+ this.y +' ';
+         }
+      },
+      plotOptions: {
+         column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+         }
+      },
+           series: [{
+         name: "<%= @universities[0].alias %>",
+         data: <%= @universities[0].months_relation.inspect %>
+   
+      }, {
+         name: "<%= @universities[1].alias %>",
+         data: <%= @universities[1].months_relation.inspect %>
+      }, {
+         name: "<%= @universities[2].alias %>",
+         data: <%= @universities[2].months_relation.inspect %>
+      }, {
+         name: "<%= @universities[3].alias %>",
+         data: <%= @universities[3].months_relation.inspect %>
+      }]
+   });
+});
+</script>
+</div>
